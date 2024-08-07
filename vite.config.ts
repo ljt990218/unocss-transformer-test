@@ -6,6 +6,7 @@ import viewport from 'postcss-mobile-forever'
 import autoprefixer from 'autoprefixer'
 import { createVitePlugins } from './build/vite'
 import { exclude, include } from './build/vite/optimize'
+import UnoCSS from 'unocss/vite'
 
 export default ({ mode }: ConfigEnv): UserConfig => {
   const root = process.cwd()
@@ -13,8 +14,12 @@ export default ({ mode }: ConfigEnv): UserConfig => {
 
   return {
     base: env.VITE_APP_PUBLIC_PATH,
-    plugins: createVitePlugins(),
 
+    plugins:[
+      UnoCSS(),
+      ...createVitePlugins()
+    ],
+    
     server: {
       host: true,
       port: 3000,
